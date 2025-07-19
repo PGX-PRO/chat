@@ -1,3 +1,4 @@
+const btnSend0 = document.getElementById("btnSend");
 function ensureUserInputExists(username) {
 	const form = document.getElementById("form");
 	let userInput = form.querySelector('input[name="username1"]');
@@ -47,7 +48,7 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 					hour: "2-digit",
 					minute: "2-digit",
 					second: "2-digit",
-					hour12: false, 
+					hour12: false, // Formato 24h
 				}),
 			}),
 		});
@@ -56,6 +57,7 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 
 		if (response.ok) {
 			console.log("Mensaje enviado:", result);
+   btnSend0.style.display="none";
 			msgInput.value = "";
 		} else {
 			console.error("Error al enviar:", result.error);
