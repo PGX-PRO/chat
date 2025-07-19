@@ -9,23 +9,66 @@ font-style: normal;
 color:#fff;
 	}
 
-
-#container{
-	background:black;
 }
+
+
+.father-img-rmt{
+@apply rounded-lg flex justify-end;
+}
+
+.father-img-rcp{
+ @apply flex flex-col text-sm rounded-lg;
+}
+
+.child-x-rmt{
+ @apply bg-blue-500 rounded-sm min-w-[40%] max-w-[80%] sm:min-w-[20%] sm:max-w-[50%];
+}
+
+.child-x-rcp{
+ @apply rounded-sm min-w-[40%] max-w-[80%] sm:min-w-[20%] sm:max-w-[50%] p-2 bg-gray-200;
+}
+
+.father-msg-rmt{
+ @apply flex gap-4 items-center justify-end;
+}
+
+.msg-send-rmt{
+ @apply bg-blue-500 min-w-[40%] max-w-[80%] sm:min-w-[20%] sm:max-w-[50%] p-2 flex flex-col gap-2 rounded-sm;
+}
+
+.user-rmt{
+ @apply flex rounded-sm font-bold text-xs;
+}
+
+
+.msg-rmt{
+ @apply flex text-white text-sm;
+}
+
+.father-msg{
+ @apply flex flex-col text-sm bg-gray-200 sm:max-w-[50%] max-w-[80%] h-auto rounded-sm;
+}
+
+.child-div-one{
+ @apply flex flex-col rounded-sm gap-2 h-auto;
+}
+
+.child-div-two{
+ @apply rounded-sm p-2 flex flex-col w-full sm:w-full h-auto;
+} /* DIVVVV RECIBIDOS */
 
 #showUser{
-	color:#000;
+ @apply flex rounded-sm items-center text-blue-500 font-bold text-xs pr-2 pl-2;
 }
 
-#msg{
-	background:rgba(227, 227, 227, 0.19);
-	color:#fff;
+.message{
+ @apply flex pl-2 items-center text-sm text-black;
 }
 
-#write{
-	background:white;
-	color:red;
+.time-rmt{
+ @apply text-xs text-gray-200 text-right;
 }
 
+.time-rcp{
+  @apply text-xs text-black text-right;
 }
