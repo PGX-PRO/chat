@@ -16,8 +16,8 @@ function ensureUserInputExists(username) {
 document.getElementById("form").addEventListener("submit", async function (e) {
 	e.preventDefault();
 	const savedUser = localStorage.getItem("user");
- const token = localStorage.getItem("token");
- console.log(token)
+	const token = localStorage.getItem("token");
+	console.log(token);
 	if (!savedUser) {
 		console.error("No se encontró usuario en localStorage");
 		return;
@@ -42,7 +42,13 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 			body: JSON.stringify({
 				username1: savedUser,
 				msg: message,
-    token:token,
+				token: token,
+				time: new Date().toLocaleTimeString("es-ES", {
+					hour: "2-digit",
+					minute: "2-digit",
+					second: "2-digit",
+					hour12: false, 
+				}),
 			}),
 		});
 
@@ -50,7 +56,7 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 
 		if (response.ok) {
 			console.log("Mensaje enviado:", result);
-			msgInput.value = ""; 
+			msgInput.value = "";
 		} else {
 			console.error("Error al enviar:", result.error);
 		}
