@@ -7,6 +7,7 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-500: oklch(63.7% 0.237 25.331);
     --color-blue-400: oklch(70.7% 0.165 254.624);
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-200: oklch(92.8% 0.006 264.531);
@@ -183,6 +184,9 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+  .top-0 {
+    top: calc(var(--spacing) * 0);
+  }
   .top-1 {
     top: calc(var(--spacing) * 1);
   }
@@ -191,6 +195,9 @@
   }
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
+  }
+  .bottom-10 {
+    bottom: calc(var(--spacing) * 10);
   }
   .left-1 {
     left: calc(var(--spacing) * 1);
@@ -218,6 +225,9 @@
     @media (width >= 96rem) {
       max-width: 96rem;
     }
+  }
+  .m-0 {
+    margin: calc(var(--spacing) * 0);
   }
   .ms-2 {
     margin-inline-start: calc(var(--spacing) * 2);
@@ -278,6 +288,9 @@
   }
   .h-screen {
     height: 100vh;
+  }
+  .max-h-\[100dvh\] {
+    max-height: 100dvh;
   }
   .w-40 {
     width: calc(var(--spacing) * 40);
@@ -367,6 +380,9 @@
   .bg-black {
     background-color: var(--color-black);
   }
+  .bg-red-500 {
+    background-color: var(--color-red-500);
+  }
   .bg-\[url\(\'wallper\.jpg\'\)\] {
     background-image: url('wallper.jpg');
   }
@@ -375,6 +391,9 @@
   }
   .bg-center {
     background-position: center;
+  }
+  .p-0 {
+    padding: calc(var(--spacing) * 0);
   }
   .p-3 {
     padding: calc(var(--spacing) * 3);
@@ -450,6 +469,11 @@
       @media (hover: hover) {
         background-color: var(--color-gray-200);
       }
+    }
+  }
+  .sm\:relative {
+    @media (width >= 40rem) {
+      position: relative;
     }
   }
   .sm\:ml-5 {
