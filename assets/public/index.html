@@ -8,24 +8,25 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body>
+		<div id="container" class="relative h-screen flex items-center sm:justify-center flex-col">
+			<div class="absolute inset-0 -z-10 bg-[url('wallper.jpg')] bg-cover bg-center brightness-50"></div>
 
-		<div id="container" class="relative h-screen sm:p-5 flex items-center sm:justify-center flex-col">
 			<div id="inputUsername" class="flex flex-col h-auto p-5 justify-center items-center gap-3">
 				<img class="h-40 w-40" src="/logo.png" />
 				<input
 					id="user"
 					placeholder="Username"
-					class="w-[100%] border-2 p-3 text-center outline-none border-blue-500 d-500 h-10 rounded-lg placeholder-gray-500"
+					class="w-[100%] border-2 p-3 text-center outline-none border-blue-500 d-500 h-10 rounded-sm placeholder-gray-500"
 					type="text" />
 			</div>
-			<div
-				id="showMessage"
-				class="mt-3 hidden relative sm:border-2 sm:border-t-2 sm:border-r-2 sm:border-l-2 sm:border-b-0 sm:border-gray-700 h-[90%] sm:h-[80%] w-full md:w-[70%] rounded-lg">
+			<div id="showMessage" class="mt-3 hidden relative h-[85%] sm:h-[90%] w-full sm:w-[60%] rounded-lg">
 				<div id="Allmsg" class="flex h-[85%] w-full overflow-auto flex-col p-3 gap-2">
-					<div id="info" class="absolute text-gray-400"></div>
+					<div
+						id="info"
+						class="absolute top-1/2 text-center left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-400"></div>
 				</div>
 				<div id="write" class="flex rounded-lg absolute h-[8%] md:h-[15%] w-full bottom-0">
-					<span class="ms-2 flex justify-center items-center sm:ml-5 text-4xl text-black">></span>
+					<span class="ms-2 flex justify-center items-center sm:ml-5 text-4xl text-blue-400">|</span>
 
 					<form id="form" class="w-full h-full flex items-center gap-1 sm:gap-3" method="post" action="/send">
 						<input
@@ -33,11 +34,11 @@
 							id="msg0"
 							name="msg"
 							autocomplete="off"
-							placeholder="write your message here"
-							class="ml-1 rounded-lg placeholder-gray-500 sm:pl-5 text-lg outline-none h-[80%] text-black flex sm:flex-1 w-[80%]" />
+							placeholder="Write your message here"
+							class="placeholder-gray-500 pl-2 sm:pl-2 border-b-2 border-blue-500 outline-none h-[80%] text-white flex sm:flex-1 w-full" />
 
 						<div class="flex h-full items-center justify-center mr-1 rounded-lg gap-3">
-							<button type="submit" class="h-[70%]">
+							<button id="btnSend" type="submit" class="hidden cursor-pointer h-[60%]">
 								<svg class="h-[70%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 									<path
 										fill="#057ee2"
@@ -49,7 +50,7 @@
 							<button
 								id="adjuntar"
 								class="h-full w-auto flex justify-center items-center hover:cursor-pointer hover:bg-gray-200 rounded-full">
-								<svg class="h-[60%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+								<svg class="h-[60%] mr-3 sm:h-[50%]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
 									<path
 										fill="#0b59dd"
 										d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z" />
@@ -63,7 +64,5 @@
 		<script src="/loadMessages.js"></script>
 		<script type="text/javascript" src="/script.js"></script>
 		<script src="/tempFile.js"></script>
-
-
- </body>
+	</body>
 </html>
