@@ -3,6 +3,8 @@ function ensureUserInputExists(username) {
 	const form = document.getElementById("form");
 	let userInput = form.querySelector('input[name="username1"]');
 
+
+
 	if (!userInput) {
 		userInput = document.createElement("input");
 		userInput.type = "hidden";
@@ -35,6 +37,23 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 	}
 
 	try {
+  if(message === "exit" || message === "salir" || message === "logout"){
+localStorage.clear();
+location.reload();
+return;
+  } 
+
+  let msgArray = message.split(" ");
+let rangeArray = msgArray.length;
+if(rangeArray === 3){ 
+if (msgArray[0] === "change" && msgArray[1] === "username" || msgArray[1] === "user"){
+ localStorage.setItem('user', msgArray[2]);
+ location.reload();
+}
+}
+
+
+
 		const response = await fetch("/send", {
 			method: "POST",
 			headers: {
@@ -66,17 +85,24 @@ document.getElementById("form").addEventListener("submit", async function (e) {
 		console.error("Error en la solicitud:", error);
 	}
 });
-document.getElementById("user").addEventListener("keyup", function (event) {
-	if (event.key === "Enter") {
-		const username = this.value.trim();
-		if (!username) return;
 
+
+
+function chat(username){
+ 	
+		if (!username) return;
 		const token = Math.random().toString(36).slice(2, 14).toUpperCase();
 		localStorage.setItem("user", username);
 		localStorage.setItem("token", token);
-
 		document.getElementById("inputUsername").style.display = "none";
 		document.getElementById("showMessage").style.display = "flex";
 		ensureUserInputExists(username);
 	}
+
+
+document.getElementById("user").addEventListener("keyup", function (event) {
+ const username = this.value.trim();
+ if (event.key === "Enter") {
+chat(username);
+}
 });
