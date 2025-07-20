@@ -8,17 +8,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	</head>
 	<body class="m-0 p-0 max-h-[100dvh]">
-		<div id="container" class="m-0 p-0 max-h-[100dvh] relative h-screen flex items-center sm:justify-center flex-col">
-			<div class="absolute inset-0 -z-10 bg-[url('wallper.jpg')] bg-cover bg-center brightness-50"></div>
+		<div id="container" class="m-0 p-0 max-h-[100dvh] relative h-screen flex items-center justify-center flex-col">
+			<div class="absolute inset-0 -z-10 bg-[url('wallper.jpg')] bg-cover bg-center brightness-90"></div>
 
-			<div id="inputUsername" class="flex flex-col h-auto p-5 justify-center items-center gap-3">
-				<img class="h-40 w-40" src="/logo.png" />
-				<input
-					id="user"
-					placeholder="Username"
-					class="w-[100%] border-2 p-3 text-center outline-none border-blue-500 d-500 h-10 rounded-sm placeholder-gray-500"
-					type="text" />
-			</div>
+	<div 
+  id="inputUsername" 
+  class=" h-full border-2 transition duration-900 border-transparent rounded-lg gap-5 flex flex-col w-full p-5 justify-center items-center gap-3 "
+>
+<span id="login" class="-mt-5 mb-8 text-white text-2xl">INICIAR SESION</span>
+
+  <img class="h-40 w-40" src="/logo.png" />
+  <input
+    id="user"
+    placeholder="Username"
+    class="w-[100%] sm:w-[25%] border-2 border-blue-300 hover:border-blue-500 transition duration-600 p-3 text-center outline-none  h-10 rounded-lg placeholder-gray-300"
+    type="text" 
+  />
+  <button onclick="chat(document.getElementById('user').value)" class="cursor-pointer sm:w-[25%] transition duration-500 hover:bg-blue-600 text-white bg-blue-500 w-full p-3 rounded-lg">
+    Ingresar
+  </button>
+</div>
+
 			<div id="showMessage" class="mt-3 hidden relative h-[95%] sm:h-[90%] w-full sm:w-[60%] rounded-lg">
 				<div id="Allmsg" class="flex h-[85%] w-full overflow-auto flex-col p-3 gap-2">
 					<div
