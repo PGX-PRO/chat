@@ -101,12 +101,14 @@ function addMessageToContainer(user, msg, token, time, isHistorical = false) {
 }
 
 function downloadImg(urlImagen) {
-
 	const now = new Date();
 	const timestamp = `${now.getFullYear().toString().slice(-2)}:${(now.getMonth() + 1).toString().padStart(2, "0")}:${now
 		.getDate()
 		.toString()
-		.padStart(2, "0")}_${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now
+		.padStart(
+			2,
+			"0",
+		)}_${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}:${now
 		.getSeconds()
 		.toString()
 		.padStart(2, "0")}`;
@@ -119,7 +121,6 @@ function downloadImg(urlImagen) {
 	link.click();
 	document.body.removeChild(link);
 }
-
 document.addEventListener("DOMContentLoaded", () => {
 	loadMessages();
 	const ws = new WebSocket("wss://chat-ad8d.onrender.com");
@@ -127,7 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
 	ws.onmessage = (event) => {
 		const message = JSON.parse(event.data);
 		if (message.type === "new_message") {
-			addMessageToContainer(message.data.user, message.data.msg, message.data.token, message.data.time);
+			addMessageToContainer(
+				message.data.user,
+				message.data.msg,
+				message.data.token,
+				message.data.time,
+			);
 			const container = document.getElementById("Allmsg");
 			const currentMessages = container.querySelectorAll("div").length;
 			notify(currentMessages + 1);
