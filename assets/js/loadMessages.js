@@ -123,7 +123,7 @@ function downloadImg(urlImagen) {
 }
 document.addEventListener("DOMContentLoaded", () => {
 	loadMessages();
-	const ws = new WebSocket("wss://chat-ad8d.onrender.com");
+	const ws = new WebSocket("wss://chat-r1ay.onrender.com");
 
 	ws.onmessage = (event) => {
 		const message = JSON.parse(event.data);
