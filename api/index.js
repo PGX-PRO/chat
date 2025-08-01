@@ -21,103 +21,101 @@ app.use(express.static(js));
 // ---------------------------------------//
 
 const DBConfig = {
-	host: "10101.servers.cmnetworkusercontent.com",
-	user: "pgx-client",
-	password: "deyvicito_webon",
-	database: "chat-database",
-	port: 3307,
+ host: "10101.servers.cmnetworkusercontent.com",
+ user: "pgx-client",
+ password: "deyvicito_webon",
+ database: "chat-database",
+ port: 3307,
 };
 
 const server = app.listen(port, () => {
-	console.log(`Servicio corriendo en el puerto => ${port}`);
+ console.log(`Servicio corriendo en el puerto => ${port}`);
 });
 
 const wss = new WebSocket.Server({ server });
 const clients = new Set();
 
 wss.on("connection", (ws) => {
-	clients.add(ws);
+ clients.add(ws);
 
-	ws.on("close", () => {
-		clients.delete(ws);
-	});
+ ws.on("close", () => {
+  clients.delete(ws);
+ });
 });
 
 function broadcastMessage(message) {
-	const data = JSON.stringify(message);
-	clients.forEach((client) => {
-		if (client.readyState === WebSocket.OPEN) {
-			client.send(data);
-		}
-	});
+ const data = JSON.stringify(message);
+ clients.forEach((client) => {
+  if (client.readyState === WebSocket.OPEN) {
+   client.send(data);
+  }
+ });
 }
 
 async function insert(user, msg, token, time) {
-	const connection = await mysql.createConnection(DBConfig);
-	try {
-		const [result] = await connection.query("INSERT INTO test (user, msg, token, time) VALUES (?, ?, ?, ?)", [
-			user,
-			msg,
-			token,
-			time,
-		]);
-		return result;
-	} finally {
-		await connection.end();
-	}
+ const connection = await mysql.createConnection(DBConfig);
+ try {
+  const [result] = await connection.query(
+   "INSERT INTO test (user, msg, token, time) VALUES (?, ?, ?, ?)",
+   [user, msg, token, time],
+  );
+  return result;
+ } finally {
+  await connection.end();
+ }
 }
 
 async function obtenerTodos() {
-	const connection = await mysql.createConnection(DBConfig);
-	try {
-		const [rows] = await connection.query("SELECT * FROM test ORDER BY time ASC");
-		return rows;
-	} finally {
-		await connection.end();
-	}
+ const connection = await mysql.createConnection(DBConfig);
+ try {
+  const [rows] = await connection.query("SELECT * FROM test ORDER BY time ASC");
+  return rows;
+ } finally {
+  await connection.end();
+ }
 }
 
 app.post("/send", async (req, res) => {
-	try {
-		const user = req.body.username1 || req.body.user;
-		const msg = req.body.msg;
-		const token = req.body.token;
-		const time = req.body.time;
+ try {
+  const user = req.body.username1 || req.body.user;
+  const msg = req.body.msg;
+  const token = req.body.token;
+  const time = req.body.time;
 
-		console.log("Datos recibidos:", { user, msg, token, time });
+  console.log("Datos recibidos:", { user, msg, token, time });
 
-		if (!msg || msg.trim() === "") {
-			return res.status(400).json({ error: "El mensaje no puede estar vacío" });
-		}
+  if (!msg || msg.trim() === "") {
+   return res.status(400).json({ error: "El mensaje no puede estar vacío" });
+  }
 
-		if (!user || !token) {
-			return res.status(400).json({ error: "Faltan credenciales" });
-		}
-		const result = await insert(user, msg, token, time);
-		console.log("Mensaje insertado:", result);
-		const newMessage = { user, msg, token, time };
-		broadcastMessage({ type: "new_message", data: newMessage });
+  if (!user || !token) {
+   return res.status(400).json({ error: "Faltan credenciales" });
+  }
+  const result = await insert(user, msg, token, time);
+  console.log("Mensaje insertado:", result);
+  const newMessage = { user, msg, token, time };
+  broadcastMessage({ type: "new_message", data: newMessage });
 
-		res.status(200).json({ success: true, message: "Mensaje enviado" });
-	} catch (error) {
-		console.error("Error al insertar mensaje:", error);
-		res.status(500).json({
-			error: "Error al insertar en la base de datos",
-			details: error.message,
-		});
-	}
+  res.status(200).json({ success: true, message: "Mensaje enviado" });
+ } catch (error) {
+  console.error("Error al insertar mensaje:", error);
+  res.status(500).json({
+   error: "Error al insertar en la base de datos",
+   details: error.message,
+  });
+ }
 });
 
 app.get("/messages", async (req, res) => {
-	try {
-		const messages = await obtenerTodos();
-		res.json(messages);
-	} catch (error) {
-		console.error(error);
-		res.status(500).json({ error: "Error al obtener mensajes" });
-	}
+ try {
+  const messages = await obtenerTodos();
+  res.json(messages);
+ } catch (error) {
+  console.error(error);
+  res.status(500).json({ error: "Error al obtener mensajes" });
+ }
 });
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(__dirname, "../assets/public/index.html"));
+ res.sendFile(path.join(__dirname, "../assets/public/index.html"));
 });
